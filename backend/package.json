@@ -1,0 +1,46 @@
+{
+  "name": "pillar-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd code && nodemon app.js",
+    "start": "cd code && node app.js",
+    "prettier": "prettier --write '**/*.{ts,js,css,html}'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/akshay_xanpool/pillar-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/akshay_xanpool/pillar-backend/issues"
+  },
+  "homepage": "https://gitlab.com/akshay_xanpool/pillar-backend#readme",
+  "dependencies": {
+    "@zilliqa-js/crypto": "^2.2.1",
+    "@zilliqa-js/zilliqa": "^2.2.1",
+    "axios": "^0.21.1",
+    "bignumber.js": "^9.0.1",
+    "bn.js": "^4.12.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-validation": "^3.0.8",
+    "faker": "^5.4.0",
+    "http-status": "^1.5.0",
+    "js-sha256": "^0.9.0",
+    "keccak256": "^1.0.2",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.0",
+    "morgan": "^1.10.0",
+    "prettier": "^2.2.1",
+    "sha256": "^0.2.0",
+    "tslib": "^2.1.0",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

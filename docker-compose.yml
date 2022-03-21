@@ -1,0 +1,60 @@
+version: '3.5'
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 7001:8081
+    environment:
+      ME_CONFIG_MONGODB_URL: "mongodb://admin:password@mongo:27017/"
+
+    depends_on: 
+      - mongo
+  app:
+    build: ./backend
+    environment:
+      NODE_ENV: dev
+      # BLOCKCHAIN_URL: "http://3.14.65.208:4201/"
+      BLOCKCHAIN_URL: "https://api.zilliqa.com/"
+      START_BLOCK: 1499621
+      # START_BLOCK: 1378700
+      CONFIRMATIONS: 1
+      PILLAR_TOKEN: "0x65211495ad83e9959f775bbe2bd7feb7c83c4f1a"
+      PILLAR_DECIMAL: 6
+      COLLATERAL_ADDRESSES: "0x4306f921c982766810cf342775fd79aa2d0d0e24"
+      VAULT_PROXIES: "0xa9660ac4f5751d9e02605992df512434697dd449"
+      VAULT_FACTORIES: "0x323e8105ba12d46e38d31cd674b6a2d16d76e6d1"
+      VAULT_STORAGES: "0x5098acdf8461036cf0678da6eb169cf4535a06dc"
+      VAULT_PARAMS: "0xd025f381506a120670104b98862f51b2dcfe8c59"
+      COLLATERAL_NAMES: "WZIL"
+      COLLATERAL_DECIMALS: "12"
+      BINANCE_URL: "https://api.binance.com/api/v3/avgPrice?symbol="
+      BINANCE_PRICE_SYMBOL: "ZILUSDT"
+      PRICE_SIGNING_KEY: "change this while"
+      MONGO_USER: "admin"
+      MONGO_PASSWORD: "password"
+      MONGO_URL: "mongo:27017"
+      MONGO_DB_NAME: "admin"
+      # 0 means no pause and parser will run, any other value the parse will stop
+      PAUSE_BLOCK: 0
+      GZIL_TOKEN: "0xa845c1034cd077bd8d32be0447239c7e4be6cb21"
+      STAKING_CONTRACT: "0x45CeABeB309a1210608080e124690C3913b41147"
+      DELEGATION_CONTRACT: "0x52473d1e65842336132a62A2A2F5Fa72a9007e96"
+      REWARD_CONTRACT: "0x4de67c4db8dbd2eeb6f8037ed779d31bd9991da4"
+      ENABLE_SERVER: "true"
+      SERVER_LOGS: "true"
+    volumes:
+      - ./backend/code:/home/app/code
+      - ./backend/package.json:/home/app/package.json
+      - ./backend/package-lock.json:/home/app/package-lock.json
+    ports:
+      - 80:80
+    depends_on: 
+      - mongo
+      - mongo-express
